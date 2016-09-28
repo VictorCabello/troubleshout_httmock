@@ -8,21 +8,21 @@ import requests
 from functools import partial
 from multiprocessing import Pool
 
-def getowner(repo, otherdata):
+def getowner(repo, session):
     owner = repo['owner']['login']
-    r = requests.get("https://api.github.com/users/{0}".format(owner))
-    return "{repo} ({owner}) -> {other}".\
+    r = session.get("https://api.github.com/users/{0}".format(owner))
+    return "{repo} ({owner})".\
         format(
             repo=repo['name'],
             owner=r.json()['login'],
-            other=otherdata
         )
 
 def main():
-    r = requests.get('https://api.github.com/orgs/octokit/repos')
+    s = requests.Session()
+    r = s.get('https://api.github.com/orgs/octokit/repos')
     repos = [repo for repo in r.json()]
     p = Pool(4)
-    func = partial(getowner, otherdata='test')
+    func = partial(getowner, session=s)
     messages =  p.map(func, repos)
 
     return messages

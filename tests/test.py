@@ -10,7 +10,7 @@ class TestSuite (unittest.TestCase):
         # Execute
             result = main()
             # Verify
-            self.assertEqual(['mycoolrepo (victor) -> test'], result)
+            self.assertEqual(['mycoolrepo (victor)'], result)
 
 
 @all_requests
