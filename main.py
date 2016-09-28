@@ -3,7 +3,7 @@
 This is only a test of how to use
 requests module and multiprocessing
 """
-import os
+import os, traceback
 
 def main():
     print 'hello'
@@ -14,4 +14,4 @@ if __name__ == '__main__':
     except Exception, e:
         print str(e)
         traceback.print_exc()
-        os.__exit(1)
+        os._exit(1)
