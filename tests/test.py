@@ -5,8 +5,12 @@ from main import main
 class TestSuite (unittest.TestCase):
 
     def test_01(self):
+        # Prepare
         with HTTMock(response_content):
-            main()
+        # Execute
+            result = main()
+            # Verify
+            self.assertEqual(['mycoolrepo (victor) -> test'], result)
 
 
 @all_requests
